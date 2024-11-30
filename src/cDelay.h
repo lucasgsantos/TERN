@@ -15,25 +15,21 @@ protected:
 
     std::queue < tern::cPlanet * > myQ;
     int myQMax;
+    double myMean;
 #ifdef tern_console
     stats::stats_t myRep;
 #endif
 
 public:
-    cDelay(  const std::string& name )
+    cDelay(  const std::string& name, double mean )
         : cEventHandler( name )
         , myQMax( 0 )
+        , myMean( mean )
     {
 
     }
-    /** Calculate delay for a planet at the head of the queue
-
-    This defaults to 1 clock tick.  Override to specialize
-    */
-    virtual int Delay( tern::cPlanet * planet )
-    {
-        return 1;
-    }
+    /** Calculate delay for a planet at the head of the queue */
+    virtual int Delay( tern::cPlanet * planet );
 
     /** Schedule completion for the planet at the head of the queue */
     void ScheduleCompletion();
